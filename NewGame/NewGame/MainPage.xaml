@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NewGame.MainPage"
+             NavigationPage.HasNavigationBar="False">
+
+    <Grid>
+        <Label Text="Version 0.1.194b21"
+               TextColor="Blue"
+               HorizontalOptions="EndAndExpand"/>
+        <Button Text="Start Game"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                TextColor="DarkSlateBlue"
+                Clicked="StartGame_Clicked"/>
+        <Button Text="Exit"
+                HorizontalOptions="Center"
+                VerticalOptions="End"
+                TextColor="DarkSlateBlue"
+                Clicked="ButtonExit_Clicked"/>
+    </Grid>
+
+</ContentPage>

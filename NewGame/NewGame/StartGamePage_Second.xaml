@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NewGame.StartGamePage_Second"
+             NavigationPage.HasNavigationBar="False">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Text="Угадать число ИИ"
+               Grid.Row="2"
+               Grid.ColumnSpan="3"
+               FontSize="Body"
+               Margin="145,0,0,0"
+               FontFamily="Cartoonist"/>
+        <Entry IsVisible="Hidden"
+               x:Name="Number"/>
+
+        <Image Source="png_file_1.png"
+               Grid.Row="3"
+               Margin="0,0,0,-50"
+               Grid.Column="0"/>
+        <Image Source="png_file.png"
+               x:Name="MyImage"
+               Grid.Row="3"
+               Margin="0,0,0,-50"
+               Grid.Column="1"/>
+        <Image Source="png_file.png"
+               Grid.Row="3"
+               Margin="0,0,0,-50"
+               Grid.Column="2"/>
+
+        <Button Text="Я узнал цифру"
+                FontFamily="Cartoonist"
+                Grid.Row="5"
+                Grid.Column="1"
+                FontSize="Micro"
+                Clicked="Button_Clicked"/>
+
+        </Grid>
+</ContentPage>
