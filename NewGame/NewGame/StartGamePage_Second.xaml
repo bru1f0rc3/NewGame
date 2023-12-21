@@ -5,50 +5,84 @@
              NavigationPage.HasNavigationBar="False">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="90" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="110" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="70" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Label Text="Угадать число ИИ"
-               Grid.Row="2"
-               Grid.ColumnSpan="3"
-               FontSize="Body"
-               Margin="145,0,0,0"
-               FontFamily="Cartoonist"/>
-        <Entry IsVisible="Hidden"
-               x:Name="Number"/>
+        <Label Text="Ход: " Grid.Row="0"
+               Margin="0,20,0,0"
+               Grid.Column="0"
+               Grid.ColumnSpan="1"
+               VerticalOptions="Center" 
+               HorizontalOptions="End" />
+        <Label x:Name="label2"
+               Text=""
+               Grid.Row="0" 
+               Margin="0,20,0,0"
+               Grid.Column="2" 
+               VerticalOptions="Center"
+               HorizontalOptions="Start" />
 
-        <Image Source="png_file_1.png"
-               Grid.Row="3"
-               Margin="0,0,0,-50"
-               Grid.Column="0"/>
-        <Image Source="png_file.png"
-               x:Name="MyImage"
-               Grid.Row="3"
-               Margin="0,0,0,-50"
-               Grid.Column="1"/>
-        <Image Source="png_file.png"
-               Grid.Row="3"
-               Margin="0,0,0,-50"
-               Grid.Column="2"/>
+        <Label Text="Быки: "
+               Grid.Row="1"
+               Margin="0,50,0,0"
+               Grid.Column="0"
+               Grid.ColumnSpan="1"
+               VerticalOptions="Center"
+               HorizontalOptions="End" />
+        
+        <Label x:Name="label3"
+               Text="" 
+               Margin="0,50,0,0"
+               Grid.Row="1"
+               Grid.Column="2"
+               VerticalOptions="Center" 
+               HorizontalOptions="Start" />
 
-        <Button Text="Я узнал цифру"
-                FontFamily="Cartoonist"
-                Grid.Row="5"
-                Grid.Column="1"
-                FontSize="Micro"
+        <Button Text="Новая игра"
+                Clicked="Button2_Clicked"
+                Grid.Row="6" 
+                Grid.Column="2"
+                Grid.ColumnSpan="3" 
+                HorizontalOptions="Center"
+                Margin="100,0,0,0"/>
+
+        <Label Text="Введите ваше число:" 
+               Grid.Row="4"
+               Margin="15,-30,0,0"
+               Grid.ColumnSpan="3"/>
+
+        <Entry x:Name="entry1"
+               HorizontalTextAlignment="Center"
+               Margin="-80,70,0,0"
+               Keyboard="Numeric" 
+               Grid.Row="3"
+               Grid.Column="3"/>
+
+        <Button Grid.Row="6"
+                Grid.Column="2"
+                Text="Выход"
                 Clicked="Button_Clicked"/>
 
-        </Grid>
+        <Button Text="Проверить"
+                x:Name="button1"
+                Margin="-10,0,0,0"
+                Clicked="Button1_Clicked"
+                Grid.Row="6"
+                Grid.ColumnSpan="2"
+                HorizontalOptions="Center" />
+
+    </Grid>
 </ContentPage>

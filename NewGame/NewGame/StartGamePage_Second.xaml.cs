@@ -12,54 +12,122 @@ namespace NewGame
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class StartGamePage_Second : ContentPage
     {
+        private int[] secretNumber;
+        private int[] currentGuess;
+        private int guessAttempts;
+
+        private const int NumberLength = 4;
+
         public StartGamePage_Second()
         {
             InitializeComponent();
+            NewGame();
         }
 
-        private async Task PlayGame()
+        private void NewGame()
         {
-            Random random = new Random();
-            int targetNumber = random.Next(1, 101);
+            secretNumber = GenerateSecretNumber();
+            currentGuess = GenerateInitialGuess();
+            guessAttempts = 0;
 
-            for (int i = 1; ; i++)
+            label2.Text = "";
+            label3.Text = "";
+        }
+
+        private int[] GenerateSecretNumber()
+        {
+            int[] number = new int[NumberLength];
+            Random rand = new Random();
+
+            for (int i = 0; i < NumberLength; i++)
             {
-                string input = await DisplayPromptAsync("Игра", $"Попытка {i}: Угадайте число от 1 до 100.", "OK", "Отмена");
+                number[i] = rand.Next(0, 10);
+            }
 
-                if (input == null) // Пользователь нажал отмену
-                {
-                    await DisplayAlert("Игра", "Игра отменена", "OK");
-                    break;
-                }
+            return number;
+        }
 
-                if (Int32.TryParse(input, out int guess)) // Проверяем, что введен корректное число
+        private int[] GenerateInitialGuess()
+        {
+            int[] guess = new int[NumberLength];
+
+            for (int i = 0; i < NumberLength; i++)
+            {
+                guess[i] = 0;
+            }
+
+            return guess;
+        }
+
+        private async void Button1_Clicked(object sender, EventArgs e)
+        {
+            int bulls = 0;
+            int cows = 0;
+
+            for (int i = 0; i < NumberLength; i++)
+            {
+                if (currentGuess[i] == secretNumber[i])
                 {
-                    if (guess < targetNumber)
-                    {
-                        await DisplayAlert("Игра", "Загаданное число больше.", "OK");
-                    }
-                    else if (guess > targetNumber)
-                    {
-                        await DisplayAlert("Игра", "Загаданное число меньше.", "OK");
-                    }
-                    else
-                    {
-                        await DisplayAlert("Поздравляем!", $"Вы угадали число {targetNumber} за {i} попыток", "УРА");
-                        MyImage.Source = "png_file_1.png";
-                        await Navigation.PushAsync(new StartGamePage_Three1());
-                        break;
-                    }
+                    bulls++;
                 }
-                else
+                else if (secretNumber.Contains(currentGuess[i]))
                 {
-                    await DisplayAlert("Ошибка", "Пожалуйста, введите корректное число.", "OK");
+                    cows++;
                 }
             }
+
+            guessAttempts++;
+
+            label2.Text = $"Ход {guessAttempts}: {string.Join("", currentGuess)}";
+            label3.Text = $"Быки: {bulls}, Коровы: {cows}";
+
+            if (bulls == NumberLength)
+            {
+                label2.Text += "\nПоздравляем! Компьютер угадал число.";
+                button1.IsEnabled = false;
+                await Task.Delay(2500);
+                await DisplayAlert("Игра", "Увы компьютер угадал ваше число", "Жалко");
+                await Task.Delay(2500);
+                await DisplayAlert("Игра", "Вы переместитесь в главное меню через 5 секунд", "OK");
+                await Task.Delay(5000);
+            }
+            else
+            {
+                currentGuess = GenerateNextGuess();
+            }
+        }
+
+        private int[] GenerateNextGuess()
+        {
+            int[] nextGuess = new int[NumberLength];
+            Random rand = new Random();
+
+            for (int i = 0; i < NumberLength; i++)
+            {
+                nextGuess[i] = rand.Next(0, 10);
+            }
+
+            return nextGuess;
+        }
+
+        private void Button2_Clicked(object sender, EventArgs e)
+        {
+            NewGame();
+            button1.IsEnabled = true;
         }
 
         private async void Button_Clicked(object sender, EventArgs e)
         {
-            await PlayGame();
+            bool checking = await DisplayAlert("Игра", "Вы точно хотите выйти?", "Да", "Нет");
+            await Task.Delay(1500);
+            if (checking == true)
+            {
+                await Navigation.PushAsync(new MainPage());
+            }
+            else
+            {
+                await DisplayAlert("Игра", "Ошибочно нажал тогда ладно", "OK");
+            }
         }
     }
 }

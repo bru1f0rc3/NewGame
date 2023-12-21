@@ -12,64 +12,108 @@ namespace NewGame
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class StartGamePage : ContentPage
     {
+        private Random rand = new Random();
+        private int[] computerGuess = new int[4];
+        private int[] availableDigits = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+        private int guessAttempts = 0;
+        private int coincidence;
+        private int partlycoincidence;
+
         public StartGamePage()
         {
             InitializeComponent();
-            DisplayIntroduction();
+            NewGame();
         }
 
-        private async void DisplayIntroduction()
+        private void NewGame()
         {
-            await DisplayAlert("Приветствую", "Правила игры таковы: Вы должны угадать число, которое загадал компьютер. Число находится в диапазоне от 1 до 100.", "OK");
-            await Task.Delay(500);
-            await DisplayAlert("Предупреждение", "За каждое правильное угадывание вы получаете закрашенную корову.", "OK");
-            await Task.Delay(500);
-            await DisplayAlert("Игра", "Ну что ж, начнем?", "Погнали");
+            GenerateComputerGuess();
+            label2.Text = "";
+            label3.Text = "";
+            textBox1.IsEnabled = true;
         }
 
-        private async Task PlayGame()
+        private void GenerateComputerGuess()
         {
-            Random random = new Random();
-            int targetNumber = random.Next(1, 101);
-
-            for (int i = 1; ; i++)
+            for (int i = 0; i < 4; i++)
             {
-                string input = await DisplayPromptAsync("Игра", $"Попытка {i}: Угадайте число от 1 до 100.", "OK", "Отмена");
+                int randomIndex = rand.Next(0, availableDigits.Length);
+                computerGuess[i] = availableDigits[randomIndex];
+                availableDigits = availableDigits.Where((val, index) => index != randomIndex).ToArray();
+            }
+        }
 
-                if (input == null) // Пользователь нажал отмену
-                {
-                    await DisplayAlert("Игра", "Игра отменена", "OK");
-                    break;
-                }
+        private void TextBox1_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (textBox1.Text.Length > 4)
+            {
+                textBox1.Text = e.OldTextValue;
+            }
+        }
 
-                if (Int32.TryParse(input, out int guess)) // Проверяем, что введен корректное число
+        private async void Button1_Click(object sender, EventArgs e)
+        {
+            if (textBox1.Text.Length != 4)
+            {
+                await DisplayAlert("Ошибка", "Введенное число должно быть четырехзначным", "OK");
+            }
+            else
+            {
+                CompareNumbers();
+                ShowResult();
+            }
+            textBox1.Text = "";
+            if (coincidence == 4)
+            {
+                await DisplayAlert("Игра", "Компьютер угадал число!", "OK");
+                await Task.Delay(1500);
+                await Navigation.PushAsync(new MainPage());
+            }
+        }
+
+        private void ShowResult()
+        {
+            label2.Text += textBox1.Text + " полностью совпало " + coincidence + " совпало " + partlycoincidence + "\n";
+        }
+
+        private void CompareNumbers()
+        {
+            coincidence = 0;
+            partlycoincidence = 0;
+            char[] userGuessChars = textBox1.Text.ToCharArray();
+            int[] userGuess = Array.ConvertAll(userGuessChars, c => (int)Char.GetNumericValue(c));
+
+            for (int i = 0; i < 4; i++)
+            {
+                if (computerGuess.Contains(userGuess[i]))
                 {
-                    if (guess < targetNumber)
+                    if (computerGuess[i] == userGuess[i])
                     {
-                        await DisplayAlert("Игра", "Загаданное число больше.", "OK");
-                    }
-                    else if (guess > targetNumber)
-                    {
-                        await DisplayAlert("Игра", "Загаданное число меньше.", "OK");
+                        coincidence++;
                     }
                     else
                     {
-                        await DisplayAlert("Поздравляем!", $"Вы угадали число {targetNumber} за {i} попыток", "УРА");
-                        MyImage.Source = "png_file_1.png";
-                        await Navigation.PushAsync(new StartGamePage_Second());
-                        break;
+                        partlycoincidence++;
                     }
-                }
-                else
-                {
-                    await DisplayAlert("Ошибка", "Пожалуйста, введите корректное число.", "OK");
                 }
             }
         }
 
-        private async void Button_Clicked(object sender, EventArgs e)
+        private void Button2_Click(object sender, EventArgs e)
         {
-            await PlayGame();
+            label3.Text = string.Join("", computerGuess);
+            label2.Text = "";
+            textBox1.IsEnabled = false;
+        }
+
+        private void Button3_Click(object sender, EventArgs e)
+        {
+            NewGame();
+        }
+
+        private void Button4_Click(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new MainPage());
         }
     }
 }

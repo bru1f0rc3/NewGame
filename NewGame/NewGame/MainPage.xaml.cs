@@ -10,6 +10,7 @@ namespace NewGame
 {
     public partial class MainPage : ContentPage
     {
+
         public MainPage()
         {
             InitializeComponent();
@@ -20,9 +21,32 @@ namespace NewGame
             Environment.Exit(0);
         }
 
-        private void StartGame_Clicked(object sender, EventArgs e)
+        private async void StartGame_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new StartGamePage());
+            bool accept = await DisplayAlert("Игра", "Здесь вы будете отгадывать число комьпютера", "OK", "НЕТ");
+            await Task.Delay(1500);
+            if (accept == true)
+            {
+                await Navigation.PushAsync(new StartGamePage());
+            }
+            else
+            {
+                await Navigation.PushAsync(new MainPage());
+            }
+        }
+
+        private async void StartGameSecond_Clicked(object sender, EventArgs e)
+        {
+            bool accept = await DisplayAlert("Игра", "Здесь вы будете загадывать число, а компьютер отгадывать", "OK", "НЕТ");
+            await Task.Delay(1500);
+            if (accept == true)
+            {
+                await Navigation.PushAsync(new StartGamePage_Second());
+            }
+            else
+            {
+                await Navigation.PushAsync(new MainPage());
+            }
         }
     }
 }
