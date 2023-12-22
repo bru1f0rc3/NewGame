@@ -95,19 +95,10 @@ public partial class ThreeLevelPage : ContentPage
                 upperBound = lowerBound + 999;
             }
 
-            List<int> possibleGuesses = new List<int>();
-
-            for (int i = lowerBound; i <= upperBound; i++)
-            {
-                if (IsValidNumber(i))
-                {
-                    possibleGuesses.Add(i);
-                }
-            }
-
             Random random = new Random();
-            int index = random.Next(possibleGuesses.Count);
-            return possibleGuesses[index];
+            int randomGuess = random.Next(lowerBound, upperBound + 1);
+
+            return randomGuess;
         }
 
         private async void CheckButton_Clicked(object sender, EventArgs e)
