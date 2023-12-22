@@ -1,68 +1,57 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="NewGame.StartGamePage"
-             NavigationPage.HasNavigationBar="False">
+             x:Class="NewGame.FourthLevelPage">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100" />
-            <RowDefinition Height="50" />
-            <RowDefinition Height="50" />
-            <RowDefinition Height="40" />
-            <RowDefinition Height="100" />
-            <RowDefinition Height="50" />
-            <RowDefinition Height="50" />
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        
-        <Label Grid.Row="1"
+
+        <Label Grid.Row="0"
                Text="Угадайте число"
                FontSize="24"
                HorizontalOptions="Center"
                VerticalOptions="CenterAndExpand" />
-        <Entry Grid.Row="2"
+        <Entry Grid.Row="1"
                x:Name="textBox1"
                Placeholder="Введите число"
                TextChanged="TextBox1_TextChanged" />
-        <Button Grid.Row="3"
+        <Button Grid.Row="2"
                 x:Name="button1"
                 Text="Проверить" 
                 Clicked="Button1_Click" />
-        <Button Grid.Row="7"
+        <Button Grid.Row="4"
                 x:Name="button2"
                 Text="Показать число"
                 Clicked="Button2_Click" />
-        <Button Grid.Row="8"
+        <Button Grid.Row="5"
                 x:Name="button3"
                 Text="Новая игра"
                 Clicked="Button3_Click" />
-        <Label Grid.Row="4"
-               Grid.RowSpan="4"
+        <Label Grid.Row="3"
                x:Name="label2"
                FontSize="20"
                VerticalOptions="FillAndExpand" />
-        <Label Grid.Row="5"
-               Grid.RowSpan="4"
+        <Label Grid.Row="3"
                x:Name="label3"
                FontSize="20" 
                VerticalOptions="FillAndExpand" />
-        <Button Grid.Row="9"
+        <Button Grid.Row="6"
                 x:Name="button4"
                 Text="Выход"
                 Clicked="Button4_Click" />
-
         <Image Source="png_file.png"
-               HorizontalOptions="Start"
-               x:Name="image"/>
+               HorizontalOptions="Start"/>
         <Image Source="png_file.png"
                HorizontalOptions="End"/>
         <Image Source="png_file.png"
-               HorizontalOptions="Center"/>
-
+               HorizontalOptions="Center"
+               x:Name="image"/>
     </Grid>
-
-
-
 </ContentPage>

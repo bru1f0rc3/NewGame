@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="NewGame.StartGamePage_Second"
+             x:Class="NewGame.ThreeLevelPage"
              NavigationPage.HasNavigationBar="False">
-
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -22,7 +22,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Label Text="Игра ''Быки и коровы'' с компьютером"
+        <Label Text="Уровень третий"
                    HorizontalOptions="Center"
                    FontSize="23"
                    Grid.Column="0"
@@ -65,12 +65,12 @@
                     Margin="20,0,0,0"
                     VerticalOptions="Center" />
 
-        <Image Source="png_file.png"
-               x:Name="image"
+        <Image Source="png_file_1.png"
                Grid.Row="1"
                Grid.Column="1"
                Margin="0,0,0,0"/>
         <Image Source="png_file.png"
+               x:Name="image"
                Grid.Row="1"
                Grid.Column="2"
                Margin="0,0,0,0"/>

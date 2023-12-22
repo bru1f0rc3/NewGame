@@ -9,14 +9,13 @@ using Xamarin.Forms.Xaml;
 
 namespace NewGame
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class StartGamePage_Second : ContentPage
-    {
-
+[XamlCompilation(XamlCompilationOptions.Compile)]
+public partial class ThreeLevelPage : ContentPage
+{
         private int targetNumber;
         private int attempts;
 
-        public StartGamePage_Second()
+        public ThreeLevelPage()
         {
             InitializeComponent();
             NewGame();
@@ -123,15 +122,9 @@ namespace NewGame
                     {
                         ResultLabel.Text = $"Поздравляем! Вы угадали число {userNumber} за {attempts} попыток.";
                         image.Source = "png_file_1.png";
-                        bool input = await DisplayAlert("Игра", "Вы хотите дальше пойти на второй уровень или выйти из игры?", "Поехали", "Прекратить");
-                        if (!input)
-                        {
-                            await Navigation.PushAsync(new SecondLevelPage());
-                        }
-                        else
-                        {
-                            await Navigation.PushAsync(new MainPage());
-                        }
+                        await DisplayAlert("Игра", "Поздравляю еще раз вы будете перемещены в главное меню через 5 секунд", "OK");
+                        await Task.Delay(5000);
+                        await Navigation.PushAsync(new MainPage());
                         return;
                     }
 

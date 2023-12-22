@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NewGame.AddGamePage"
+             NavigationPage.HasNavigationBar="False">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Image Source="background.png"
+               Grid.Column="0"
+               Grid.Row="0"
+               Grid.ColumnSpan="7"
+               Grid.RowSpan="7"
+               Aspect="AspectFill"/>
+        <Image Source="door.png"
+               Grid.Row="1"
+               x:Name="elf0">
+            <Image.GestureRecognizers>
+                <SwipeGestureRecognizer Direction="Down"
+                                        Swiped="SwipeGestureRecognizer_Swiped"/>
+                <SwipeGestureRecognizer Direction="Left"
+                                        Swiped="SwipeGestureRecognizer_Swiped"/>
+                <SwipeGestureRecognizer Direction="Right"
+                                        Swiped="SwipeGestureRecognizer_Swiped"/>
+                <SwipeGestureRecognizer Direction="Up"
+                                        Swiped="SwipeGestureRecognizer_Swiped"/>
+            </Image.GestureRecognizers>
+        </Image>
+        <Image Source="door.png"
+               Grid.Row="1"
+               Grid.Column="2"
+               x:Name="elf1">
+            <Image.GestureRecognizers>
+                <SwipeGestureRecognizer Direction="Down"
+                                        Swiped="SwipeGestureRecognizer_Swiped1"/>
+                <SwipeGestureRecognizer Direction="Left"
+                                        Swiped="SwipeGestureRecognizer_Swiped1"/>
+                <SwipeGestureRecognizer Direction="Right"
+                                        Swiped="SwipeGestureRecognizer_Swiped1"/>
+                <SwipeGestureRecognizer Direction="Up"
+                                        Swiped="SwipeGestureRecognizer_Swiped1"/>
+            </Image.GestureRecognizers>
+        </Image>
+        <Image Source="door.png"
+               Grid.Row="1"
+               Grid.Column="4"
+               x:Name="elf2">
+            <Image.GestureRecognizers>
+                <SwipeGestureRecognizer Direction="Down"
+                                        Swiped="SwipeGestureRecognizer_Swiped2"/>
+                <SwipeGestureRecognizer Direction="Left"
+                                        Swiped="SwipeGestureRecognizer_Swiped2"/>
+                <SwipeGestureRecognizer Direction="Right"
+                                        Swiped="SwipeGestureRecognizer_Swiped2"/>
+                <SwipeGestureRecognizer Direction="Up"
+                                        Swiped="SwipeGestureRecognizer_Swiped2"/>
+            </Image.GestureRecognizers>
+        </Image>
+
+        <Image Source="door.png"
+               Grid.Row="3"
+               x:Name="elf3">
+            <Image.GestureRecognizers>
+                <SwipeGestureRecognizer Direction="Down"
+                                        Swiped="SwipeGestureRecognizer_Swiped3"/>
+                <SwipeGestureRecognizer Direction="Left"
+                                        Swiped="SwipeGestureRecognizer_Swiped3"/>
+                <SwipeGestureRecognizer Direction="Right"
+                                        Swiped="SwipeGestureRecognizer_Swiped3"/>
+                <SwipeGestureRecognizer Direction="Up"
+                                        Swiped="SwipeGestureRecognizer_Swiped3"/>
+            </Image.GestureRecognizers>
+        </Image>
+        <Image Source="door.png"
+               Grid.Row="3"
+               Grid.Column="2"
+               x:Name="elf4">
+            <Image.GestureRecognizers>
+                <SwipeGestureRecognizer Direction="Down"
+                                        Swiped="SwipeGestureRecognizer_Swiped4"/>
+                <SwipeGestureRecognizer Direction="Left"
+                                        Swiped="SwipeGestureRecognizer_Swiped4"/>
+                <SwipeGestureRecognizer Direction="Right"
+                                        Swiped="SwipeGestureRecognizer_Swiped4"/>
+                <SwipeGestureRecognizer Direction="Up"
+                                        Swiped="SwipeGestureRecognizer_Swiped4"/>
+            </Image.GestureRecognizers>
+        </Image>
+        <Image Source="door.png"
+               Grid.Row="3"
+               Grid.Column="4"
+               x:Name="elf5">
+            <Image.GestureRecognizers>
+                <SwipeGestureRecognizer Direction="Down"
+                                        Swiped="SwipeGestureRecognizer_Swiped5"/>
+                <SwipeGestureRecognizer Direction="Left"
+                                        Swiped="SwipeGestureRecognizer_Swiped5"/>
+                <SwipeGestureRecognizer Direction="Right"
+                                        Swiped="SwipeGestureRecognizer_Swiped5"/>
+                <SwipeGestureRecognizer Direction="Up"
+                                        Swiped="SwipeGestureRecognizer_Swiped5"/>
+            </Image.GestureRecognizers>
+        </Image>
+
+        <Image Source="door.png"
+               Grid.Row="5"
+               x:Name="elf6">
+            <Image.GestureRecognizers>
+                <SwipeGestureRecognizer Direction="Down"
+                                        Swiped="SwipeGestureRecognizer_Swiped6"/>
+                <SwipeGestureRecognizer Direction="Left"
+                                        Swiped="SwipeGestureRecognizer_Swiped6"/>
+                <SwipeGestureRecognizer Direction="Right"
+                                        Swiped="SwipeGestureRecognizer_Swiped6"/>
+                <SwipeGestureRecognizer Direction="Up"
+                                        Swiped="SwipeGestureRecognizer_Swiped6"/>
+            </Image.GestureRecognizers>
+        </Image>
+        <Image Source="door.png"
+               Grid.Row="5"
+               Grid.Column="2"
+               x:Name="elf7">
+            <Image.GestureRecognizers>
+                <SwipeGestureRecognizer Direction="Down"
+                                        Swiped="SwipeGestureRecognizer_Swiped7"/>
+                <SwipeGestureRecognizer Direction="Left"
+                                        Swiped="SwipeGestureRecognizer_Swiped7"/>
+                <SwipeGestureRecognizer Direction="Right"
+                                        Swiped="SwipeGestureRecognizer_Swiped7"/>
+                <SwipeGestureRecognizer Direction="Up"
+                                        Swiped="SwipeGestureRecognizer_Swiped7"/>
+            </Image.GestureRecognizers>
+        </Image>
+        <Image Source="door.png"
+               Grid.Row="5"
+               Grid.Column="4"
+               x:Name="elf8">
+            <Image.GestureRecognizers>
+                <SwipeGestureRecognizer Direction="Down"
+                                        Swiped="SwipeGestureRecognizer_Swiped8"/>
+                <SwipeGestureRecognizer Direction="Left"
+                                        Swiped="SwipeGestureRecognizer_Swiped8"/>
+                <SwipeGestureRecognizer Direction="Right"
+                                        Swiped="SwipeGestureRecognizer_Swiped8"/>
+                <SwipeGestureRecognizer Direction="Up"
+                                        Swiped="SwipeGestureRecognizer_Swiped8"/>
+            </Image.GestureRecognizers>
+        </Image>
+
+    </Grid>
+</ContentPage>

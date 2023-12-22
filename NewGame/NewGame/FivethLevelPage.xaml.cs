@@ -9,16 +9,16 @@ using Xamarin.Forms.Xaml;
 
 namespace NewGame
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class StartGamePage : ContentPage
-    {
+[XamlCompilation(XamlCompilationOptions.Compile)]
+public partial class FivethLevelPage : ContentPage
+{
         private Random rand = new Random();
         private int[] computerGuess = new int[4];
         private int[] availableDigits = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
         private int coincidence;
         private int partlycoincidence;
 
-        public StartGamePage()
+        public FivethLevelPage()
         {
             InitializeComponent();
             NewGame();
@@ -65,17 +65,14 @@ namespace NewGame
             if (coincidence == 4)
             {
                 await DisplayAlert("Игра", "Пользователь угадал число!", "OK");
+                await Task.Delay(1500);
                 image.Source = "png_file_1.png";
                 await Task.Delay(5000);
-                bool accept = await DisplayAlert("Игра", "Вы хотите на второй уровень?", "Да", "Нет");
-                if (!accept)
-                {
-                    await Navigation.PushAsync(new FourthLevelPage());
-                }
-                else
-                {
-                    await Navigation.PushAsync(new MainPage());
-                }
+                await DisplayAlert("Игра", "Поздравляю, вы угадали число! еще раз!!!", "OK");
+                await Task.Delay(1500);
+                await DisplayAlert("Игра", "Наслаждайтесь закрашенными коровками", "OK");
+                await Task.Delay(5000);
+                await Navigation.PushAsync(new MainPage());
             }
         }
 

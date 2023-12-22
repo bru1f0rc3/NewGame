@@ -48,5 +48,18 @@ namespace NewGame
                 await Navigation.PushAsync(new MainPage());
             }
         }
+
+        private async void Button_Clicked(object sender, EventArgs e)
+        {
+            bool accept = await DisplayAlert("Система", "Вы точно хотите на доп. игру?", "Да", "Передумал");
+            if (accept == true)
+            {
+                await Navigation.PushAsync(new AddGamePage());
+            }
+            else
+            {
+                await Navigation.PushAsync(new MainPage());
+            }
+        }
     }
 }

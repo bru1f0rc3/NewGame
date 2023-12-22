@@ -25,6 +25,14 @@
                 VerticalOptions="End"
                 TextColor="DarkSlateBlue"
                 Clicked="ButtonExit_Clicked"/>
+        <Button Text="Дополнительная Игра"
+                VerticalOptions="Start"
+                HorizontalOptions="End"
+                Margin="0,25,0,0"
+                TextColor="DarkSlateBlue"
+                Background="Black"
+                Opacity="0.7"
+                Clicked="Button_Clicked"/>
     </Grid>
 
 </ContentPage>
