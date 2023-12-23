@@ -12,9 +12,10 @@ namespace NewGame
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class StartGamePage_Second : ContentPage
     {
-
         private int targetNumber;
         private int attempts;
+        private List<int[]> possibleNumbers = new List<int[]>();
+        private List<int> guessedNumbers = new List<int>();
 
         public StartGamePage_Second()
         {
@@ -31,7 +32,7 @@ namespace NewGame
             AttemptsLabel.Text = $"Количество попыток: {attempts}";
         }
 
-        private void StartGameButton_Clicked(object sender, EventArgs e)
+        private async void StartGameButton_Clicked(object sender, EventArgs e)
         {
             if (int.TryParse(NumberEntry.Text, out int userNumber))
             {
@@ -40,25 +41,45 @@ namespace NewGame
                     targetNumber = userNumber;
 
                     ResultLabel.Text = "Компьютер угадывает число...";
-                    CheckButton.IsEnabled = false;
                     StartGameButton.IsEnabled = false;
 
-                    Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+                    await Task.Run(async () =>
                     {
-                        int computerGuess = GenerateComputerGuess();
-
-                        attempts++;
-
-                        if (computerGuess == targetNumber)
+                        Random random = new Random();
+                        while (true)
                         {
-                            ResultLabel.Text = $"Компьютер угадал число {computerGuess}! Поздравляем!";
-                            return false;
-                        }
-                        else
-                        {
-                            ResultLabel.Text = $"Попытка {attempts}: Компьютер предполагает число {computerGuess}.";
-                            AttemptsLabel.Text = $"Количество попыток: {attempts}";
-                            return true;
+                            int computerGuess = GenerateComputerGuess(random);
+
+                            attempts++;
+
+                            if (computerGuess == targetNumber)
+                            {
+                                Device.BeginInvokeOnMainThread(() =>
+                                {
+                                    ResultLabel.Text = $"Компьютер угадал число {computerGuess}! Поздравляем!";
+                                });
+                                await Task.Delay(10000);
+                                Device.BeginInvokeOnMainThread(() =>
+                                {
+                                    image.Source = "png_file_1.png";
+                                });
+                                await Task.Delay(10000);
+                                Device.BeginInvokeOnMainThread(() =>
+                                {
+                                    Navigation.PushAsync(new SecondLevelPage());
+                                });
+                                break;
+                            }
+                            else
+                            {
+                                Device.BeginInvokeOnMainThread(() =>
+                                {
+                                    ResultLabel.Text = $"Попытка {attempts}: Компьютер предполагает число {computerGuess}.";
+                                    AttemptsLabel.Text = $"Количество попыток: {attempts}";
+                                });
+                            }
+
+                            await Task.Delay(1000);
                         }
                     });
                 }
@@ -85,62 +106,28 @@ namespace NewGame
             return numberString.Distinct().Count() == numberString.Length;
         }
 
-        private int GenerateComputerGuess()
+        private int GenerateComputerGuess(Random random)
         {
-            int lowerBound = 1000;
-            int upperBound = 9999;
+            int guess = 0;
 
-            if (targetNumber >= 1000 && targetNumber <= 9999)
+            if (possibleNumbers.Count > 0)
             {
-                lowerBound = (targetNumber / 1000) * 1000;
-                upperBound = lowerBound + 999;
-            }
-
-            Random random = new Random();
-            int randomGuess = random.Next(lowerBound, upperBound + 1);
-
-            return randomGuess;
-        }
-
-        private async void CheckButton_Clicked(object sender, EventArgs e)
-        {
-            if (int.TryParse(NumberEntry.Text, out int userNumber))
-            {
-                if (IsValidNumber(userNumber))
-                {
-                    attempts++;
-
-                    if (userNumber == targetNumber)
-                    {
-                        ResultLabel.Text = $"Поздравляем! Вы угадали число {userNumber} за {attempts} попыток.";
-                        image.Source = "png_file_1.png";
-                        bool input = await DisplayAlert("Игра", "Вы хотите дальше пойти на второй уровень или выйти из игры?", "Поехали", "Прекратить");
-                        if (!input)
-                        {
-                            await Navigation.PushAsync(new SecondLevelPage());
-                        }
-                        else
-                        {
-                            await Navigation.PushAsync(new MainPage());
-                        }
-                        return;
-                    }
-
-                    int bulls = CountBulls(userNumber);
-                    int cows = CountCows(userNumber);
-
-                    ResultLabel.Text = $"Попытка {attempts}: Быки: {bulls}, Коровы: {cows}.";
-                    AttemptsLabel.Text = $"Количество попыток: {attempts}";
-                }
-                else
-                {
-                    ResultLabel.Text = "Пожалуйста, введите четырехзначное число с уникальными цифрами.";
-                }
+                int index = random.Next(possibleNumbers.Count);
+                int[] numberArray = possibleNumbers[index];
+                guess = numberArray[0] * 1000 + numberArray[1] * 100 + numberArray[2] * 10 + numberArray[3];
+                possibleNumbers.RemoveAt(index);
+                guessedNumbers.Add(guess);
             }
             else
             {
-                ResultLabel.Text = "Пожалуйста, введите четырехзначное число.";
+                do
+                {
+                    int offset = random.Next(100);
+                    guess = targetNumber - 50 + offset;
+                } while (guessedNumbers.Contains(guess)); 
             }
+
+            return guess;
         }
 
         private int CountBulls(int number)
@@ -178,5 +165,6 @@ namespace NewGame
 
             return cows;
         }
+
     }
 }

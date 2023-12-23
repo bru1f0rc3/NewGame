@@ -55,15 +55,6 @@
                    Grid.Column="3"
                    Grid.ColumnSpan="2"/>
 
-        <Button x:Name="CheckButton"
-                    Text="Проверить"
-                    Clicked="CheckButton_Clicked"
-                    IsEnabled="False"
-                    Grid.ColumnSpan="2"
-                    Grid.Row="6"
-                    Margin="20,0,0,0"
-                    VerticalOptions="Center" />
-
         <Image Source="png_file_1.png"
                Grid.Row="1"
                Grid.Column="1"
