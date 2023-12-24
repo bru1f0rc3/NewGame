@@ -30,6 +30,7 @@ namespace NewGame
 
             ResultLabel.Text = "Загадайте четырехзначное число.";
             AttemptsLabel.Text = $"Количество попыток: {attempts}";
+            paused.IsVisible = true;
         }
 
         private async void StartGameButton_Clicked(object sender, EventArgs e)
@@ -58,12 +59,12 @@ namespace NewGame
                                 {
                                     ResultLabel.Text = $"Компьютер угадал число {computerGuess}! Поздравляем!";
                                 });
-                                await Task.Delay(10000);
+                                await Task.Delay(2000);
                                 Device.BeginInvokeOnMainThread(() =>
                                 {
                                     image.Source = "png_file_1.png";
                                 });
-                                await Task.Delay(10000);
+                                await Task.Delay(2000);
                                 Device.BeginInvokeOnMainThread(() =>
                                 {
                                     Navigation.PushAsync(new SecondLevelPage());
@@ -124,47 +125,25 @@ namespace NewGame
                 {
                     int offset = random.Next(100);
                     guess = targetNumber - 50 + offset;
-                } while (guessedNumbers.Contains(guess)); 
+                } while (guessedNumbers.Contains(guess) || guess < 1000 || guess > 9999);
+                guessedNumbers.Add(guess);
             }
 
             return guess;
         }
 
-        private int CountBulls(int number)
+        private async void PausePlayGame(object sender, EventArgs e)
         {
-            string targetString = targetNumber.ToString();
-            string numberString = number.ToString();
+            bool accept = await DisplayAlert("Система", "Вы точно хотите остановиться?", "Да", "Нет");
 
-            int bulls = 0;
-
-            for (int i = 0; i < 4; i++)
+            if (accept == true)
             {
-                if (targetString[i] == numberString[i])
-                {
-                    bulls++;
-                }
+                await Navigation.PushAsync(new StartGamePage_Second());
             }
-
-            return bulls;
-        }
-
-        private int CountCows(int number)
-        {
-            string targetString = targetNumber.ToString();
-            string numberString = number.ToString();
-
-            int cows = 0;
-
-            for (int i = 0; i < 4; i++)
+            else
             {
-                if (targetString.Contains(numberString[i]))
-                {
-                    cows++;
-                }
+                await DisplayAlert("Система", "Вы ошибочно?", "Да");
             }
-
-            return cows;
         }
-
     }
 }

@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NewGame.AddGame"
+             NavigationPage.HasNavigationBar="False">
+    <Grid
+          Opacity="0.75">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Text="Игра ''Камень, ножница и бумага''"
+               Grid.ColumnSpan="7"
+               HorizontalOptions="Center"
+               FontSize="25"
+               TextColor="MediumPurple"/>
+
+        <Label Text="Ну что начнем, начинай вводить против тебя будет компьютер"
+               Grid.Row="1"
+               VerticalOptions="Center"
+               Grid.RowSpan="2"
+               TextColor="MediumPurple"
+               FontSize="24"
+               Grid.Column="2"
+               Grid.ColumnSpan="4"/>
+
+        <Entry Grid.Row="3"
+               Grid.Column="1"
+               Grid.ColumnSpan="4"
+               Margin="0,50,-75,0"
+               HorizontalTextAlignment="Center"
+               HorizontalOptions="Center"
+               x:Name="strings"
+               Placeholder="Введите rock, scissors, paper"
+               TextColor="MediumPurple"
+               Opacity="0.75"/>
+
+        <Label x:Name="label1"
+               Grid.Row="5"
+               Grid.Column="2"
+               Grid.ColumnSpan="3"
+               TextColor="MediumPurple"/>
+
+        <Button Text="Я выиграл!"
+                Background="Black"
+                TextColor="MediumPurple"
+                Grid.Row="6"
+                Grid.Column="2"
+                Grid.ColumnSpan="3"
+                Clicked="Button_Clicked"/>
+
+
+    </Grid>
+</ContentPage>

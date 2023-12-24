@@ -56,6 +56,14 @@
                    Grid.Column="3"
                    Grid.ColumnSpan="2"/>
 
+        <Button Text="Прерваться"
+                Grid.Row="6"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                x:Name="paused"
+                IsVisible="False"
+                Clicked="PausePlayGame"/>
+
         <Image Source="png_file_1.png"
                Grid.Row="1"
                Grid.Column="1"
