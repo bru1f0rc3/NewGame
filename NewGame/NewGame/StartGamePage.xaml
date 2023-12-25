@@ -30,14 +30,6 @@
                 x:Name="button1"
                 Text="Проверить" 
                 Clicked="Button1_Click" />
-        <Button Grid.Row="7"
-                x:Name="button2"
-                Text="Показать число"
-                Clicked="Button2_Click" />
-        <Button Grid.Row="8"
-                x:Name="button3"
-                Text="Новая игра"
-                Clicked="Button3_Click" />
         <Label Grid.Row="4"
                Grid.RowSpan="4"
                x:Name="label2"
@@ -52,6 +44,21 @@
                 x:Name="button4"
                 Text="Выход"
                 Clicked="Button4_Click" />
+
+        <CheckBox Grid.Row="8"
+                  HorizontalOptions="Start"
+                  Margin="0,0,90,-5"
+                  CheckedChanged="CheckBox_CheckedChanged"/>
+        <Label Grid.Row="8"
+               HorizontalOptions="Start"
+               Margin="30,17,0,-5"
+               Text="Я решил жульничать и использую ответ!"/>
+        <Label x:Name="answer"
+               Grid.Row="8"
+               HorizontalOptions="End"
+               FontSize="15"
+               Margin="0,15,0,0"/>
+
 
         <Image Source="png_file.png"
                HorizontalOptions="Start"

@@ -68,7 +68,7 @@ public partial class FourthLevelPage : ContentPage
                 image.Source = "png_file_1.png";
                 await Task.Delay(5000);
                 bool accept = await DisplayAlert("Игра", "Вы хотите на третий уровень?", "Да", "Нет");
-                if (!accept)
+                if (accept == true)
                 {
                     await Navigation.PushAsync(new FivethLevelPage());
                 }
@@ -107,13 +107,6 @@ public partial class FourthLevelPage : ContentPage
             }
         }
 
-        private void Button2_Click(object sender, EventArgs e)
-        {
-            label3.Text = string.Join("", computerGuess);
-            label2.Text = "";
-            textBox1.IsEnabled = false;
-        }
-
         private void Button3_Click(object sender, EventArgs e)
         {
             NewGame();
@@ -123,5 +116,11 @@ public partial class FourthLevelPage : ContentPage
         {
             Navigation.PushAsync(new MainPage());
         }
+
+        private void CheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        {
+            answer.Text += $"Ответ: {string.Join("", computerGuess)}";
+        }
+
     }
 }
